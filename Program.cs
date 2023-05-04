@@ -1,4 +1,5 @@
 using File_Upload_ByBlazor.Data;
+using File_Upload_ByBlazor.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -14,6 +15,7 @@ namespace File_Upload_ByBlazor
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
+            builder.Services.AddScoped<IFileUpload, FileUpload>();
 
             var app = builder.Build();
 

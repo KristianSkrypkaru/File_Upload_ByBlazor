@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using File_Upload_ByBlazor.Services;
+@inject IFileUpload fileUpload;
 
 <div class="col-6">
     <h1>File Upload in Blazor</h1>
@@ -30,7 +32,23 @@
 
     private async Task UploadFiles()
     {
-        
+        try
+        {
+            if(selectedFiles is not null && selectedFiles.Count > 0)
+            {
+                foreach(var file in selectedFiles)
+                {
+                    await fileUpload.UploadFile(file);
+                }
+
+                labelText = $"Upload of {selectedFiles.Count} files successful";
+
+            }
+        }
+        catch (Exception ex)
+        {
+            labelText = $"Upload Failed due to {ex.Message}";   
+        }
     }
 
 }
